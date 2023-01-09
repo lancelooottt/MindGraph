@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.chaquo.python' //new code for integrating python code
-    id 'realm-android'     //new code notepad 
+    id 'realm-android'     //new code notepad
 }
 
 android {

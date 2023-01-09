@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         //create python object
         //PyObject pyobj = py.getModule("myscript"); //give python script name
-        PyObject pyobj = py.getModule("try_sentimentAnalysis");
+        //PyObject pyobj = py.getModule("try_sentimentAnalysis");
+        PyObject pyobj = py.getModule("less_runtime");
 
         //call the function of the python file
         PyObject obj = pyobj.callAttr("output", textInput);

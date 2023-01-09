@@ -29,16 +29,16 @@ def output(textInput):
     data = data.drop('author', axis=1)
 
     # Dropping rows with other emotion labels
-    data = data.drop(data[data.sentiment == 'anger'].index)
+    #data = data.drop(data[data.sentiment == 'anger'].index)
     data = data.drop(data[data.sentiment == 'boredom'].index)
     data = data.drop(data[data.sentiment == 'enthusiasm'].index)
     data = data.drop(data[data.sentiment == 'empty'].index)
     data = data.drop(data[data.sentiment == 'fun'].index)
     data = data.drop(data[data.sentiment == 'relief'].index)
     data = data.drop(data[data.sentiment == 'surprise'].index)
-    data = data.drop(data[data.sentiment == 'love'].index)
+    #data = data.drop(data[data.sentiment == 'love'].index)
     data = data.drop(data[data.sentiment == 'hate'].index)
-    data = data.drop(data[data.sentiment == 'neutral'].index)
+    #data = data.drop(data[data.sentiment == 'neutral'].index)
     data = data.drop(data[data.sentiment == 'worry'].index)
 
     # Making all letters lowercase
@@ -75,9 +75,11 @@ def output(textInput):
     freq = list(freq.index)
     data['content'] = data['content'].apply(lambda x: " ".join(x for x in x.split() if x not in freq))
 
+
     #Encoding output labels 'sadness' as '1' & 'happiness' as '0'
     lbl_enc = preprocessing.LabelEncoder()
     y = lbl_enc.fit_transform(data.sentiment.values)
+
 
     # Splitting into training and testing data in 90:10 ratio
     X_train, X_val, y_train, y_val = train_test_split(data.content.values, y, stratify=y, random_state=42, test_size=0.1, shuffle=True)
@@ -178,8 +180,14 @@ def output(textInput):
     tweet_pred = lsvm.predict(tweet_count)
 
     if tweet_pred == 0:
-        emotion = "Happiness"
+        emotion = "Anger"
     elif tweet_pred == 1:
+        emotion = "Happiness"
+    elif tweet_pred == 2:
+        emotion = "Love"
+    elif tweet_pred == 3:
+        emotion = "Neutral"
+    elif tweet_pred == 4:
         emotion = "Sadness"
 
     return "Predicted Emotion:", emotion
